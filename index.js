@@ -16,6 +16,8 @@ if (url === undefined || discordWebhook === undefined) {
 }
 
 const statusCodes = process.env.STATUS_CODES
+const spam = process.env.SPAM || false
+const spamAttempts = 5
 
 console.log('---------------------------------------------')
 console.log(` ______   ______     __  __     ______    
@@ -73,7 +75,13 @@ function intervalFunc() {
         )
 
         if (statusCodes.includes(statusCode)) {
-            informWebhook(statusCode)
+            if (spam) {
+                for (let i = 0; i < spamAttempts; i++) {
+                    informWebhook(statusCode)
+                }
+            } else {
+                informWebhook(statusCode)
+            }
         }
     })
 
