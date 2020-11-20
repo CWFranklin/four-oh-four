@@ -82,10 +82,10 @@ function intervalFunc() {
             } else {
                 informWebhook(statusCode)
             }
+
+            // clearInterval(interval)
         }
     })
-
-    clearInterval(interval)
 }
 
 var interval = setInterval(intervalFunc, intervalTime * 1000)
